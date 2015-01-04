@@ -3,7 +3,7 @@ var assert = require('assert');
 var ursa = require('ursa');
 
 var KEY_BITS = 4096;
-var PBKDF2_SALT_BYTES = 256;
+var PBKDF2_SALT_BITS = 256;
 var PBKDF2_ITERATIONS = 20000;
 var PBKDF2_LENGTH_BITS = 256;
 
@@ -65,7 +65,7 @@ exports.decrypt = function decrypt(privateKey, encData) {
  */
 exports.encryptPrivateKey = function encryptPrivateKey(privateKey, password, cb) {
   // generate random salt to create user key
-  crypto.randomBytes(PBKDF2_SALT_BYTES, function(err, salt) {
+  crypto.randomBytes(PBKDF2_SALT_BITS / 8, function(err, salt) {
     assert.ifError(err);
 
     // create a key derived from user's password
