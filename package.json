@@ -1,0 +1,17 @@
+{
+  "name": "sdata",
+  "version": "0.0.0",
+  "description": "secure (encrypt) data using keys derived from user passwords",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "Sean Lavine <sean@mirrorx.com>",
+  "license": "ISC",
+  "dependencies": {
+    "ursa": "^0.8.1"
+  },
+  "devDependencies": {
+    "mocha": "^2.1.0"
+  }
+}
