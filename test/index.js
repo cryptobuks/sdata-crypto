@@ -6,27 +6,39 @@ describe('sdata', function() {
   var PRIVATE_KEY = '-----BEGIN RSA PRIVATE KEY-----\n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\n-----END RSA PRIVATE KEY-----\n';
   var PUBLIC_KEY = '-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEA5sD+XO6+9VLoF75W4Oha\nICuWfz+z5zskASZ1904j2nFj2yuT60YGnzvT70YsV1GoxaUeUNWmWerwyHKdGpRL\ncWXhS4qUEC5RbGiZ1jyCrwEss3+rkP4ChLUuiUiyhxRm0DWNjyhPsYSv12HQVNJ3\n8pJvCfx9MVzhuZObrSamZhFPh79BD/5vEKpsqel9HwLLs183uxcGmc7Rq2BndbFB\nePTM3S8kNULRcZ/TC9o0sXtBFb5A3yJdO1RaW5HE1ALBb/MTKs5IJvl8yEDoqqGO\n9xmKolgwyItQmoaEZSVHFoRAdCbFPuPH5EEtTRQUy2TDC49SE3OxBMobv4aBKgZl\nD9oKjLnX104Rnx/jDGaqvmTPhL8KHDRyApqknuX5TMJJ5tRA2CaADxiDYd/KRT8d\nj/zMGjOq7wSerxAcHzkj7SHJ+M3voQTu+tsdMJ2Zzo0Btm4T27pyWATdhxxgbTG9\nkKUeZoSnYxS3RbFcZEwpm9poYxHm9V3/uHT2GHbnhE0QtB6BGuFaDXS2ocsjxvpx\nTJWOZAZyP/OpfsI95nzqew5IrpMeVcGDomE+ENlCDs5g3titmbOqGmH1MZxPnlHl\nENWW85OG48tGYMYFdj88rbyrSdsj9xYYvhSK1GFxgDwI99l9LBnjq7KXAXJvHdtn\n2Qftj3xbP8WLAdvYzD9+KtcCAwEAAQ==\n-----END PUBLIC KEY-----\n';
 
+  var ENC_PRIVATE_KEY = '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';
+
+  var DATA = JSON.stringify({
+    name: 'John Smith',
+    ssn4: '1234',
+    dob: '1952-12-31'
+  });
+
+  var ENC_DATA = 'QQIbruXb0PB3bkdGE1aF/TSBBW17VzvIJdztzO+OldprZyMrrmD+dvt2go+lWLvWJC0uWbcvXHkh/NpQhyIuN6L0LbhKczuaPnP8cKm95IgcxsJmdE/a5SwxP4FADN9t4R8ant28zknSMBFRYV888yhljLG3iZphGnwwHBWzkCRp45SRhCdZCvMWTuCr8amWn1yGYU/z04dixw3r713fbP5o7T+F6PswvO2h2hYCe3bwG1Oe4lgMp3J4Lx8lbZfXlWHVvtiXy9LTTBY3eXDrqPKkUBeJWF0BgXDEi5GSAHIwBb/hypVpThTHiugLpUgqIgOhKBncggIutthrQRs1SVmwBFAlMH7kTsVP8Z2ekg696Cnw0xOfKOe2WAtpFAn0Hd2uGRmT6mFVVpmonJXF8r8UFbyughsvuoB0quF4mcXoKHrsD4jgcyMZEq1dpOcjJMtrDUup12o84xr2AElUlk6npmWh8/TGUWjR+Kmz5PrJ05grs4QO12SemveV7OsBhjni5wIjoaw2Z5EFbUg3kwtp9IzxBDYcZUAuzO6B4PqalxWn4Fg7u94vTknVZILTlQCDFcXclzKfS/3Hft1YUVLP58mpXLq0TGioqNa4UG07InzvZpUv1UVQOlfATCnZ5KwabDL1mDZq3pdVvwCr+r31GgjaiHRUl75EdJnpAZs=';
+
   describe('generateKeyPair()', function() {
     it('should be able to generate a key pair', function() {
       var keyPair = sdata.generateKeyPair();
       assert.ok(keyPair);
       assert.ok(keyPair.privateKey);
       assert.ok(keyPair.publicKey);
-      //console.log(keyPair);
     });
   });
 
   describe('encrypt()', function() {
     it('should be able to encrypt data', function() {
-      var mydata = JSON.stringify({
-        name: 'John Smith',
-        ssn4: '1234',
-        dob: '1952-12-31'
-      });
-
-      var encdata = sdata.encrypt(PUBLIC_KEY, mydata);
+      var encdata = sdata.encrypt(PUBLIC_KEY, DATA);
       assert.ok(encdata);
       assert.equal(typeof encdata, 'string');
+    });
+  });
+
+  describe('decrypt()', function() {
+    it('should be able to decrypt data', function() {
+      var data = sdata.decrypt(PRIVATE_KEY, ENC_DATA);
+      assert.ok(data);
+      assert.equal(typeof data, 'string');
+      assert.equal(data, DATA);
     });
   });
 
@@ -42,15 +54,15 @@ describe('sdata', function() {
     });
   });
 
-  /*
+
   describe('decryptPrivateKey()', function() {
     it('should be able to decrypt private key with user password', function(done) {
-      sdata.decryptPrivateKey(encKeyPair, 'mypassword', function(err, privateKey) {
+      sdata.decryptPrivateKey(ENC_PRIVATE_KEY, 'mypassword', function(err, privateKey) {
         assert.ifError(err);
-        assert.strictEqual(privateKey, PRIVATE_KEY);
+        assert.equal(privateKey, PRIVATE_KEY);
+        done();
       });
     });
   });
-  */
 
 });

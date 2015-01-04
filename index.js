@@ -7,14 +7,20 @@ var PBKDF2_SALT_BYTES = 256;
 var PBKDF2_ITERATIONS = 20000;
 var PBKDF2_LENGTH_BITS = 256;
 
-var deriveKey = function derivedKey(password, salt, cb) {
+/**
+ * Create a derived key from a user password (plaintext) and salt
+ *
+ * @param {String} password
+ * @param {Buffer} salt
+ * @param {Function} cb
+ */
+var deriveKey = function deriveKey(password, salt, cb) {
   crypto.pbkdf2(password, salt, PBKDF2_ITERATIONS, PBKDF2_LENGTH_BITS, cb);
 };
 
 /**
- * Generate a key pair for a user based on their password (plaintext).
+ * Generate a key pair for a user.
  *
- * @param {String} password A user's plaintext password
  * @return {Object}
  */
 exports.generateKeyPair = function generateKeyPair() {
@@ -26,9 +32,9 @@ exports.generateKeyPair = function generateKeyPair() {
 };
 
 /**
- * Encrypt data with the given keyPair
+ * Encrypt data with the given public key
  *
- * @param {Object|String} publicKey
+ * @param {String} publicKey
  * @param {String} data
  * @returns {String}
  */
@@ -38,7 +44,19 @@ exports.encrypt = function encrypt(publicKey, data) {
 };
 
 /**
- * Encrypt a user's keypair with their password (plaintext) for secure storage
+ * Decrypt data with the given private key
+ *
+ * @param {String} privateKey
+ * @param {Buffer} encData
+ * @returns {String}
+ */
+exports.decrypt = function decrypt(privateKey, encData) {
+  privateKey = ursa.coercePrivateKey(privateKey);
+  return privateKey.decrypt(encData, 'base64', 'utf8');
+};
+
+/**
+ * Encrypt a user's private key with their password (plaintext) for secure storage
  *
  * @param {String} privateKey
  * @param {String} password
@@ -68,23 +86,23 @@ exports.encryptPrivateKey = function encryptPrivateKey(privateKey, password, cb)
 };
 
 /**
- * Decrypt a user's keypair from with their password (plaintext)
+ * Decrypt a user's private key with their password (plaintext)
  *
- * @param {String} keyPairString
+ * @param {String} encPrivateKey
  * @param {String} password
  * @param {Function} cb
  */
-exports.decryptPrivateKey = function decryptPrivateKey(keyPairString, password, cb) {
-  var sep = keyPairString.indexOf('|');
-  var salt = keyPairString.substr(0, sep);
-  var encKey = keyPairString.substr(sep);
+exports.decryptPrivateKey = function decryptPrivateKey(encPrivateKey, password, cb) {
+  var sep = encPrivateKey.indexOf('|');
+  var salt = new Buffer(encPrivateKey.substr(0, sep), 'base64');
+  var encKey = encPrivateKey.substr(sep);
 
   deriveKey(password, salt, function(err, derivedKey) {
     assert.ifError(err);
-    var decipher = crypto.createDicipher('aes-256-ctr', derivedKey);
-    var keypair = decipher.update(encKey, 'base64');
-    keypair += decipher.final('base64');
-    cb(null, keypair);
+    var decipher = crypto.createDecipher('aes-256-ctr', derivedKey);
+    var privateKey = decipher.update(encKey, 'base64');
+    privateKey += decipher.final('base64');
+    cb(null, privateKey);
   });
 
 };
