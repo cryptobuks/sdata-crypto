@@ -1,5 +1,4 @@
 var crypto = require('crypto');
-var assert = require('assert');
 var ursa = require('ursa');
 
 var KEY_BITS = 4096;
@@ -66,11 +65,11 @@ exports.decrypt = function decrypt(privateKey, encData) {
 exports.encryptPrivateKey = function encryptPrivateKey(privateKey, password, cb) {
   // generate random salt to create user key
   crypto.randomBytes(PBKDF2_SALT_BITS / 8, function(err, salt) {
-    assert.ifError(err);
+    if (err) return cb(err);
 
     // create a key derived from user's password
     deriveKey(password, salt, function(err, derivedKey) {
-      assert.ifError(err);
+      if (err) return cb(err);
 
       // encrypt the user's key using their key
       var cipher = crypto.createCipher('aes-256-ctr', derivedKey);
@@ -98,7 +97,8 @@ exports.decryptPrivateKey = function decryptPrivateKey(encPrivateKey, password, 
   var encKey = encPrivateKey.substr(sep);
 
   deriveKey(password, salt, function(err, derivedKey) {
-    assert.ifError(err);
+    if (err) return cb(err);
+
     var decipher = crypto.createDecipher('aes-256-ctr', derivedKey);
     var privateKey = decipher.update(encKey, 'base64');
     privateKey += decipher.final('base64');
