@@ -1,6 +1,6 @@
 {
   "name": "sdata-crypto",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "secure (encrypt) data using keys derived from user passwords",
   "main": "index.js",
   "scripts": {
