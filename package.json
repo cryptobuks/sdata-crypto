@@ -13,5 +13,24 @@
   },
   "devDependencies": {
     "mocha": "^2.1.0"
-  }
+  },
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/freewil/sdata-crypto.git"
+  },
+  "keywords": [
+    "zero-knowledge",
+    "crypto",
+    "encrypt",
+    "encryption",
+    "nist",
+    "800-132"
+  ],
+  "bugs": {
+    "url": "https://github.com/freewil/sdata-crypto/issues"
+  },
+  "homepage": "https://github.com/freewil/sdata-crypto#readme"
 }
